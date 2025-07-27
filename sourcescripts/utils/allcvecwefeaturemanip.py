@@ -42,13 +42,13 @@ class DatasetDataset:
         
         if partition == "train" or partition == "val":
             vul = self.df[self.df.vul == 1]
-            nonvul = self.df[self.df.vul == 0]#.sample(len(vul), random_state=0)
+            nonvul = self.df[self.df.vul == 0].sample(len(vul), random_state=0)
             self.df = pd.concat([vul, nonvul])
         
         if partition == "test":
             vul = self.df[self.df.vul == 1]
             nonvul = self.df[self.df.vul == 0]
-            # nonvul = nonvul.sample(min(len(nonvul), len(vul) * 20), random_state=0)
+            nonvul = nonvul.sample(min(len(nonvul), len(vul) * 20), random_state=0)
             self.df = pd.concat([vul, nonvul])
 
         if sample > 0:

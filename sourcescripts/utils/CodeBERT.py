@@ -26,7 +26,7 @@ class DatasetDatasetNLP:
         self.df = self.df[self.df.label == partition]
         if partition == "train" or partition == "val":
             vul = self.df[self.df.vul == 1]
-            nonvul = self.df[self.df.vul == 0]#.sample(len(vul), random_state=0) # take it back
+            nonvul = self.df[self.df.vul == 0].sample(len(vul), random_state=0)
             self.df = pd.concat([vul, nonvul])
         tokenizer = AutoTokenizer.from_pretrained("microsoft/codebert-base")
         tk_args = {"padding": True, "truncation": True, "return_tensors": "pt"}

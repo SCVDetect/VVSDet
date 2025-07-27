@@ -71,7 +71,7 @@ class VulnerabilityAnalyzer:
             stmtweight=1,
             gnntype="gat",
             scea=0.5,
-            lr=1e-3
+            lr=1e-3 # 1e-5 
         )
         
         data = gpht.DatasetDatasetVvuldetDataModule(
@@ -206,8 +206,12 @@ class VulnerabilityAnalyzer:
         }).reset_index()
         
         merged_df = pd.merge(func_df, stmt_grouped, on=['CWE_ID', 'func_id'])
-
         output_path = os.path.join(self.output_dir, "function_level_predictions.csv")
+        columns_to_drop = ['node_labels', 'node_probs', 'node_preds', 'func_probs',
+                           'func_prob_0','func_prob_1','line_number','node_label','node_pred']
+        existing_columns = [col for col in columns_to_drop if col in merged_df.columns]
+        merged_df = merged_df.drop(columns=existing_columns)
+        merged_df.reset_index(drop=True, inplace=True)
         merged_df.to_csv(output_path, index=False)
         print(f"Saved function-level predictions to {output_path}")
     
@@ -246,7 +250,12 @@ class VulnerabilityAnalyzer:
             })
         
         output_path = os.path.join(self.output_dir, "cwe_level_metrics.csv")
-        pd.DataFrame(cwe_results).to_csv(output_path, index=False)
+        columns_to_drop = ['node_labels', 'node_probs', 'node_preds', 'func_probs']
+        cwe_results = pd.DataFrame(cwe_results)
+        existing_columns = [col for col in columns_to_drop if col in cwe_results.columns]
+        cwe_results = cwe_results.drop(columns=existing_columns)
+        cwe_results.reset_index(drop=True, inplace=True)
+        cwe_results.to_csv(output_path, index=False)
         print(f"Saved CWE-level metrics to {output_path}")
     
     def _calculate_metrics(self):
