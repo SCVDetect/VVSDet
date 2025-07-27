@@ -1,4 +1,4 @@
-## Domain-Aware Graph Neural Networks for Source Code Vulnerability Detection
+### Domain-Aware Graph Neural Networks for Source Code Vulnerability Detection
 Paper submitted to XXX Journal.
 
 ### Section 1: Experiment Replication
