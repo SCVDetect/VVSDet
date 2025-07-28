@@ -29,8 +29,9 @@ fi
 
 
 # https://drive.google.com/file/d/14TT--A5nFHmbNSe3vfqmz930RDAhKFO1/view?usp=sharing
+# https://drive.google.com/file/d/1YdWbFtReHK0nBkfjY9OrLFG68sEkyxYM/view?usp=sharing
 if [[ ! -f "MegaVul_Java_Domain.csv" ]]; then
-    gdown https://drive.google.com/uc\?id\=14TT--A5nFHmbNSe3vfqmz930RDAhKFO1
+    gdown https://drive.google.com/uc\?id\=1YdWbFtReHK0nBkfjY9OrLFG68sEkyxYM
     unzip MegaVul_Java_Domain.zip
     rm MegaVul_Java_Domain.zip
 else
